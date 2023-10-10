@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cities</string>
+    <string name="edit">Введите любой город</string>
+    <string name="ok">ОК</string>
+</resources>
