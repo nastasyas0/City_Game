@@ -46,24 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 // город введен с той буквы, с кот. закончился город, вывед. программой
                 boolean flag = true;
                 if (clicked > 1) {
-                    // последняя буква в названии выведенного программой города
-                    String last_letter_last_city = lastLetter(last_city);
-                    // первая буква следующего введенного города
-                    String first_letter_city = city.substring(0, 1).toLowerCase(Locale.ROOT);
-
-                    if (!first_letter_city.equals(last_letter_last_city)) {
-                        tvEnterCity.setText(" Вы неверно ввели\n            город.\n    Игра окончена!");
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvEnterCity.setText("   Попробуй снова!");
-                            }
-                        }, 2000);
-                        clicked = 0;
-                        tvCounter.setText(String.valueOf(clicked));
-                        edCity.setText("");
-                        flag = false;
-                    }
+                    flag = checkCorrectCity(flag);
                 }
 
                 if (flag) {
@@ -152,5 +135,28 @@ public class MainActivity extends AppCompatActivity {
             last_letter_city = name_city.substring(name_city.length() - 2, name_city.length() - 1);
         }
         return last_letter_city;
+    }
+
+    // проверка, что город введен с той буквы, с кот. закончился город, вывед. программой
+    private Boolean checkCorrectCity(Boolean flag) {
+        // последняя буква в названии выведенного программой города
+        String last_letter_last_city = lastLetter(last_city);
+        // первая буква следующего введенного города
+        String first_letter_city = city.substring(0, 1).toLowerCase(Locale.ROOT);
+
+        if (!first_letter_city.equals(last_letter_last_city)) {
+            tvEnterCity.setText(" Вы неверно ввели\n            город.\n    Игра окончена!");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    tvEnterCity.setText("   Попробуй снова!");
+                }
+            }, 2000);
+            clicked = 0;
+            tvCounter.setText(String.valueOf(clicked));
+            edCity.setText("");
+            flag = false;
+        }
+        return flag;
     }
 }
